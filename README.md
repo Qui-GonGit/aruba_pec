@@ -35,6 +35,7 @@ La parte di security è sul gateway, che parlerà direttamente con l'Idp per l'a
 In fase di colloquio spiegherò tutto il giro.
 
 E' stato utilizzato Spring Boot per creare i servizi di  PEC dei filtro messaggi, FIRMA allegati, e CONSERVAZIONE documenti firmati.
+Come DB è stato utilizzazto H2 dialect Hibernate ideale per POC o prime implementazioni.
 
 Per la firma elettronica dei documenti si è utilizzato la libreria IText. 
 
