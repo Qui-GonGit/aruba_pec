@@ -1,0 +1,61 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka:password@localhost:8761/eureka
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          gateway:
+            route:
+              RouteDefinitionLocator: INFO
+    root: INFO
+server:
+  port: 8080
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri:  http://localhost:8181/realms/Aruba_Realm
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedHeaders: "*"
+            allowedMethods:
+            - GET
+            - POST
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
+      routes:
+      - id: pec-service
+        uri: lb://pec-service
+        predicates:
+        - Path=/api/pec/**
+      - id: firma-service
+        uri: lb://firma-service
+        predicates:
+        - Path=/api/firma/**
+      - id: cons-documenti-service_id
+        uri: lb://cons-documenti-service
+        predicates:
+        - Path=/api/cons-doc/**
+      - id: discovery-server
+        uri: http://localhost:8761
+        predicates:
+        - Path=/eureka/web
+        filters:
+        - SetPath=/
+      - id: discovery-server-static
+        uri: http://localhost:8761
+        predicates:
+        - Path=/eureka/**

@@ -1,0 +1,75 @@
+<mat-toolbar color="primary">
+
+  <mat-toolbar-row>
+    <span>Aruba Pec</span>
+    <span class="example-spacer"></span>
+    <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+  </mat-toolbar-row>
+
+
+</mat-toolbar>
+<form>
+  <mat-form-field appearance="fill">
+    <mat-label>Seleziona PEC</mat-label>
+    <mat-select [ngModel]="selectedValue" (selectionChange)="settingsTable($event)" name="pec">
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let pec of user.pecs" [value]="pec.name">{{pec.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div class="example-form">
+  <mat-form-field class="example-full-width">
+    <mat-label>Sender</mat-label>
+    <input [(ngModel)]="requestSender" matInput placeholder="inviata da:" value="">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Content</mat-label>
+    <textarea matInput [(ngModel)]="requestContent" placeholder="corpo del messaggio"></textarea>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Subject</mat-label>
+    <input matInput [(ngModel)]="requestSubject" placeholder="oggetto">
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Priority</mat-label>
+    <input matInput [(ngModel)]="requestPriority" placeholder="bassa">
+  </mat-form-field>
+</div>
+<div>
+  <mat-slide-toggle [(ngModel)]="hasAttachment" class="basic-container attachment">Attachment</mat-slide-toggle>
+</div>
+<button (click)="sendToBE()" mat-raised-button color="primary">Search</button>
+<mat-table [dataSource]="dataSource" matSort>
+  <!-- Colonna Mittente -->
+  <ng-container matColumnDef="sender">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Mittente </mat-header-cell>
+    <mat-cell *matCellDef="let message"> {{message.sender}} </mat-cell>
+  </ng-container>
+
+  <!-- Colonna Oggetto -->
+  <ng-container matColumnDef="subject">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Oggetto </mat-header-cell>
+    <mat-cell *matCellDef="let message"> {{message.subject}} </mat-cell>
+  </ng-container>
+
+  <!-- Colonna Data -->
+  <ng-container matColumnDef="content">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Content </mat-header-cell>
+    <mat-cell *matCellDef="let message"> {{message.text }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="priority">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Priority </mat-header-cell>
+    <mat-cell *matCellDef="let message"> {{message.priority }} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="attachment">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Attachment </mat-header-cell>
+    <mat-cell *matCellDef="let message"> {{message.attachment }} </mat-cell>
+  </ng-container>
+
+  <!-- Intestazione Tabella -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+  <!-- Riga Dati -->
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
