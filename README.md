@@ -18,8 +18,7 @@ Tenendo conto dei requisiti descritti, si potrebbe utilizzare le seguenti tecnol
 * Eureka netflix per il discovery services
 * Zuul netflix per la gestione dei bilanciamenti dei servizi
 * Database distribuito come Cassandra per la gestione dei tenant e Mysql o PostgreSql per la gestione dei messaggi/chiavi private etc.
-* Elasticsearch + Kibana + LogStash per la corretta visulaizzazione dei log
-* Cassandra per la gestione dei metadati dei tenant.
+* Elasticsearch + Kibana + LogStash per la corretta visualizzazione dei log
 
 # Svolgimento
 Il lavoro svolto è diverso rispetto alla soluzione architetturale descritta sopra, poichè non ho avuto molto tempo per lo svolgimento, ma potrebbe essere considerato come possibile Spike in un processo SCRUM AGILE come ad esempio una POC (Proof of Concept)
